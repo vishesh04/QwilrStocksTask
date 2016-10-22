@@ -115,3 +115,18 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+grails.app.context = '/'
+
+grails {
+    mongodb {
+        connectionString = System.getenv("MONGODB_URI") ?: "mongodb://localhost:27017/qwilr"
+    }
+
+    auth {
+        google {
+            clientId = "566937600739-dbnv9ch40vpna5tggaeegstr37bh3ps9.apps.googleusercontent.com"
+            clientSecret = "IFBJSWjLkcurgZMB5IQ1GnJL"
+        }
+    }
+}

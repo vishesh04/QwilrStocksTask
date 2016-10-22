@@ -1,13 +1,10 @@
 class UrlMappings {
 
-	static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
-            constraints {
-                // apply constraints here
-            }
-        }
+    static mappings = {
+        "/"(controller: "Home")
 
-        "/"(view:"/index")
-        "500"(view:'/error')
-	}
+        "/auth/google/login"    (controller: "Auth"){ action = [GET: "googleLogin"] }
+        "/auth/google/callback" (controller: "Auth"){ action = [GET: "googleCallback"] }
+        "/auth/logout"          (controller: "Auth"){ action = [GET: "logout"] }
+    }
 }

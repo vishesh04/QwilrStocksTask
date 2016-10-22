@@ -18,3 +18,5 @@ stacktrace.log
 .idea/
 .classpath
 .project
+*.tld
+.asscache
