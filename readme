@@ -1,0 +1,26 @@
+To run the application locally -
+
+1. Install Mongodb
+2. Make sure Java is installed 
+3. run `./grailsw r-a` from the root directory of this repository
+4. Access the app at localhost:5000
+
+Tech Stack - 
+
+1. Mongodb as database
+2. AngularJS frontend
+3. Rest APIs written in Grails framework
+
+Key decisions - 
+
+Implemented 'Login with Google' for creating and logging in user. It had foloowing benefits - 
+
+1. One less password to remember for user
+2. Very user friendly. No verification of email id is required
+3. Built in security. Application doesn’t store user’s password.
+4. It cut down a lot of effort in creating login/signup UIs, email verification, forword password etc
+
+Data API - 
+
+To get the stocks data(company lookup and quotes), I chose markitondemand. This API is freely available with no rate limits. In my brief search, I found that yahoo doesn't have a official API, some reverse engineered versions are out there, but not reliable. Other reliable and official APIs were not freely available.
+Since I didn't spent a lot of time for searching the API as this is a prototype app, I still kept the API calls layer well abstracted, so that replacing it with a new API becomes very easy.

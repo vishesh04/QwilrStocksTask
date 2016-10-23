@@ -48,7 +48,7 @@ class ApiController {
         def requestedQuanity = input.quantity as Integer
         def requestedPrice = input.LastPrice as float
         def stockName = input.Name
-        if (!name) throw new WebException("Please provide stock name", 400)
+        if (!stockName) throw new WebException("Please provide stock name", 400)
         transactionService.buyStock(requestedQuanity, input.Symbol, user, stockName, requestedPrice)
         def resp = [success: true]
         render resp as JSON
