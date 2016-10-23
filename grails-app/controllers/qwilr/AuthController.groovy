@@ -27,7 +27,7 @@ class AuthController {
             def user = User.findByEmailId(userProfile.email)
             if (!user) {
                 user = new User(firstName: userProfile.firstName,
-                        lastName: userProfile.lastName, emailId: userProfile.email)
+                        lastName: userProfile.lastName, emailId: userProfile.email, cash: 0)
                 user.save(flush: true, failOnError: true)
             }
             session.userId = user.id

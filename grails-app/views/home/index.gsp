@@ -4,15 +4,8 @@
   <head>
     <title>Qwilr</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/flatNotify-0.1.css">
     <link rel="stylesheet" href="/css/style.css">
-
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/angular.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script>
-      var loggedIn = ${loggedIn};
-    </script>
   </head>
 
   <body>
@@ -20,7 +13,7 @@
       <g:if test="${loggedIn}">
         <div class="row">
           <a class="pull-right btn btn-default" href="/auth/logout">Logout</a>
-          <span class="userInfo">Hello ${userFirstName}</span>
+          <span class="info">Hello ${userFirstName}</span>
         </div>
         <div class="row" ng-view></div>
       </g:if>
@@ -31,4 +24,16 @@
       </g:else>
     </div>
   </body>
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/angular-route.min.js"></script>
+  <script src="/js/ui-bootstrap-tpls.min.js"></script>
+
+  <script src="/js/classie.js"></script>
+  <script src="/js/flatNotify-0.1.js"></script>
+
+  <script src="/js/app.js"></script>
 </html>

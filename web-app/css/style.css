@@ -1,0 +1,17 @@
+.info {
+    margin-top: 10px;
+    font-size: medium;
+}
+
+.lookup {
+    margin: 0px 20px 0px 20px;
+    width: 300px;
+}
+
+.cash-input, .unit-input {
+    width: 80px;
+}
+
+.btn-cash {
+    padding: 0px 10px 0px 10px;
+}

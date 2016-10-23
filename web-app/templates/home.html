@@ -1,0 +1,78 @@
+<div class="info">
+  Your cash balance: <input type="number" class="cash-input" ng-show="editingCash" ng-model="newCash"/><span ng-show="!editingCash">{{cash}}</span> $
+  <button class="btn btn-default btn-cash" style="margin-left: 20px" ng-show="!editingCash" ng-click="editCash()">Change</button>
+  <button class="btn btn-default btn-cash" style="margin-left: 20px" ng-show="editingCash" ng-click="saveCash()">Save</button>
+</div>
+<div style="margin-top: 10px">
+  <label for="lookup"> Search (Type company name or symbol)</label>
+  <input class="lookup" type="text" id="lookup" ng-model="selectedCompany"
+         uib-typeahead="company as company.label for company in lookup($viewValue)"
+         typeahead-loading="loadingSymbols" typeahead-no-results="noSymbol" typeahead-wait-ms="300"
+         typeahead-template-url="typeahead-template.html" typeahead-on-select="getQuote($item, $model)" class="form-control"/>
+  <span ng-show="loadingSymbols">Loading...</span>
+  <span ng-show="noSymbol">No Companies matching your query</span>
+</div>
+<table class="table table-striped table-bordered table-hover" style="margin-top: 20px" ng-show="quote">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Symbol</th>
+      <th>Price/Unit</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{quote.Name}}</td>
+      <td>{{quote.Symbol}}</td>
+      <td>{{quote.LastPrice}}</td>
+      <td>
+        <input type="number" class="unit-input" ng-show="editingBuy" placeholder="Quantity" ng-model="quote.quantity"/>
+        <button class="btn btn-default" ng-show="cash && !editingBuy" ng-click="editBuy()">Buy</button>
+        <button class="btn btn-default"ng-show="editingBuy" ng-click="confirmBuy()">Confirm</button>
+        <button class="btn btn-default"ng-show="editingBuy" ng-click="cancelBuy()">Cancel</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div ng-show="stocks.length != 0">
+  <div class="info">Your Assets:</div>
+  <table class="table table-striped table-bordered table-hover" style="margin-top: 20px">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Transaction History</th>
+        <th>Current Price/Unit</th>
+        <th>Current Value</th>
+        <th>Gain</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="stock in stocks">
+        <td>{{stock.name}}</td>
+        <td>{{stock.symbol}}</td>
+        <td>{{stock.quantity}}</td>
+        <td>
+          <div ng-repeat="t in stock.transactions">{{t.type == 'BUY' ? 'Bought': 'Sold'}} {{t.quantity}} units on {{t.time}} @ {{t.unitPrice}}$/unit</div>
+        </td>
+        <td>{{stock.LastPrice}}<span ng-show="stock.LastPrice">$</span></td>
+        <td>{{calculatePrice(stock)}}<span ng-show="stock.LastPrice">$</span></td>
+        <td>{{calculateGain(stock)}}<span ng-show="stock.LastPrice">%</span></td>
+        <td>
+          <input type="number" class="unit-input" ng-show="stock.editingSell" placeholder="Quantity" ng-model="stock.quantityToSell"/>
+          <button class="btn btn-default" ng-show="!stock.editingSell && stock.quantity" ng-click="editSell(stock)">Sell</button>
+          <button class="btn btn-default"ng-show="stock.editingSell" ng-click="confirmSell(stock)">Confirm</button>
+          <button class="btn btn-default"ng-show="stock.editingSell" ng-click="cancelSell(stock)">Cancel</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="info">Total asset value (Excluding cash): {{calculateTotalAsset()}}</div>
+
+<script type="text/ng-template" id="typeahead-template.html">
+  <a><span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span></a>
+</script>
