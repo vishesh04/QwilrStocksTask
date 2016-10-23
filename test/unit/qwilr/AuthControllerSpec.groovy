@@ -9,12 +9,20 @@ import spock.lang.Specification
 @TestFor(AuthController)
 class AuthControllerSpec extends Specification {
 
-    def setup() {
+    void "test googleLogin"() {
+        when:
+        controller.googleLogin()
+
+        then:
+        response.status == 302
     }
 
-    def cleanup() {
-    }
+    void "test logout"() {
+        when:
+        controller.logout()
 
-    void "test something"() {
+        then:
+        session.userId == null
+        response.status == 302
     }
 }

@@ -116,6 +116,26 @@ log4j.main = {
            'net.sf.ehcache.hibernate'
 }
 
+grails {
+    plugin {
+        cookiesession {
+            enabled = true
+            encryptcookie = true
+            cryptoalgorithm = "Blowfish"
+            secret = "b1tsp1l@n1"
+            cookiecount = 5
+            maxcookiesize = 2048  // 2kb
+            sessiontimeout = 2 * 7 * 24 * 3600 // 2 weeks
+            cookiename = 'stocksdemo'
+            condenseexceptions = true
+            sethttponly = true
+            path = '/'
+            serializer = 'java'
+            springsecuritycompatibility = false
+        }
+    }
+}
+
 grails.app.context = '/'
 
 grails {

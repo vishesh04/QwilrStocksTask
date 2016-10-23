@@ -4,8 +4,9 @@ class HomeController {
 
     def index() {
         if (session.userId) {
+            User user = User.get(session.userId)
             [loggedIn     : true,
-             userFirstName: 'Vishesh']
+             userFirstName: user.firstName]
         } else {
             [loggedIn: false]
         }
